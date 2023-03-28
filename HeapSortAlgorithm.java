@@ -2,7 +2,7 @@
 import java.util.Arrays;
 
 public class HeapSortAlgorithm {
-    public static void HeapSort(int[] arr) {
+    public static void BuildHeap(int[] arr) {
         for (int i = arr.length / 2 - 1; i >= 0; i--) { //2, 1, 0순으로 반복됨, 자식 노드를 가지는 부모 노드가 총 3개
             Heapify(arr, i, arr.length);   //int[] arr = {3, 5, 2, 7, 1, 4, 6} arr에서 받을 배열 값들
         } //크기는 총 7개
@@ -18,7 +18,7 @@ public class HeapSortAlgorithm {
         int rightidx = 2 * parentIdx + 2;   // 오른쪽 노드 번호
         int maxIdx = parentIdx; //첫 반복 -> root노드
 
-        if ((leftidx < size) && (arr[maxIdx] < arr[leftidx])){ //index의 크기는 size 값을 벗어날 수 없다.
+        if ((leftidx < size) && (arr[maxIdx] < arr[leftidx])){ //index의 크기는 size 값을 벗어날 수 없다. 재귀적으로 함수를 굴릴 때 함수의 크기를 벗어날 수 있으므로 주의!
             maxIdx = leftidx;  
         }
 
@@ -28,7 +28,7 @@ public class HeapSortAlgorithm {
 
         if (parentIdx != maxIdx){ //위 과정을 거치지 않았으면 실행되지 않는다.
             Swap(arr, maxIdx, parentIdx); //서로 자리가 바뀜
-            Heapify(arr, maxIdx, size); //heapify 를 실행해서 정렬
+            Heapify(arr, maxIdx, size); //heapify 를 실행해서 정렬, 조건에 해당될 때마다 heapify를 실행시킨다. 
         }
     }
 
@@ -40,8 +40,8 @@ public class HeapSortAlgorithm {
 //temp라는 임시 저장소를 통해 두 개의 배열의 위치를 서로 바꾼다.
     public static void main(String[] args) {
         // Test code
-        int[] arr = {3, 5, 2, 7, 1, 4, 6, 1}; //배열 생성, 힙 알고리즘을 통해 돌려봄
-        HeapSort(arr);
+        int[] arr = {3, 5, 2, 7, 1, 4, 6, 1}; //임의의 배열 생성
+        BuildHeap(arr);
         System.out.println("힙 정렬: " + Arrays.toString(arr)); //받은 배열의 값을 문자열로 차례대로 출력한다.
     }
 }
